@@ -2,3 +2,5 @@
 *.o
 *.out
 a.out
+sol
+output.txt
