@@ -56,8 +56,8 @@ signed main() {
     int sum = pre[n];
     if (sum%3 != 0) { cout << "0"; return 0; }
     int ans = 0;
-    int l = 0, r = 0;
-    while (l < n-2) {
+    int l = 1, r = 1;
+    while (l < n) {
 
     }
 
