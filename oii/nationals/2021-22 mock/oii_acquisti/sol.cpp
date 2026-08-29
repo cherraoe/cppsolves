@@ -20,12 +20,15 @@ vector<ll> calcola(int T, int M, vector<ll> S, vector<ll> P) {
         int lb = lower_bound(pre.begin(), pre.end(), cap) - pre.begin();
         ll n = pres[lb-1];
         cap -= pre[lb-1];
-        if (lb <= T) {
+        if (lb == 0) {
+            n = S[0];
+        } else if (lb <= T) {
             if (lb-1 != 0) n += min((ll)cap/(lb-1), S[lb-1]);
             else n += S[lb-1];
         }
 
         out.push_back(n);
+
     }
     return out;
 }
