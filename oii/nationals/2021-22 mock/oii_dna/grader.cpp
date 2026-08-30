@@ -22,6 +22,7 @@ int main() {
     // freopen("output.txt", "w", stdout);
 
     cin >> secret;
+    cout << "secret: " <<secret;
 
     cnt = 0;
     auto ans = analizza(secret.size());
