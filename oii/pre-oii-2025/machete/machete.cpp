@@ -1,24 +1,38 @@
+#include <algorithm>
 #include <bits/stdc++.h>
 using namespace std;
 
 int machete(int n, int k, vector<int> p) {
-    //k is the height limit
-    vector<vector<int>> t(n);
-    int ans = 0;
+    vector<vector<int>> adj(n);
+    vector<int> h(n, 0);
     for (int i = 1; i < n; i++) {
-        t[p[i]].push_back(i);
+        // pushing this node to its parent;
+        adj[p[i]].push_back(i);
     }
-    queue<pair<int,int>> q;
-    q.push({0, 1});
+
+    // pushing reverse bfs order
+    queue<int> q;
+    q.push(0);
+    stack<int> sq;
     while (!q.empty()) {
-        auto [pos, v] = q.front(); q.pop();
-        for (int nx : t[pos]) {
-            if (v >= k) { q.push({nx, 2}); ans++; }
-            else q.push({nx,v+1});
+        int cu = q.front(); q.pop();
+        for (int nx : adj[cu]) {
+            q.push(nx);
+            sq.push(nx);
         }
     }
 
-    return ans;
+    int cuts = 0;
+    while (!sq.empty()) {
+        int cu = sq.top(); sq.pop();
+        if (h[cu] == k-2 && p[cu] != 0) {
+            cuts++;
+        } else {
+            h[p[cu]] = max(h[p[cu]], h[cu]+1);
+        }
+    }
+
+    return cuts;
 }
 
 
